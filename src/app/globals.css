@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --coffee: #2b0f0b;
+  --electric-orange: #ff3300;
+  --bone: #f2e8d5;
+  --terracotta: #d97d54;
+  --taupe: #a89085;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  background-color: var(--coffee);
+  color: var(--bone);
+  overflow-x: hidden;
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Kinetic text */
+.kinetic-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+}
+
+/* Glassmorphism cards */
+.glass-card {
+  background: rgba(242, 232, 213, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(242, 232, 213, 0.1);
+  border-radius: 24px;
+}
+
+.glass-card:hover {
+  background: rgba(242, 232, 213, 0.08);
+  border-color: rgba(255, 51, 0, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--coffee);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--taupe);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terracotta);
+}
+
+/* Magnetic button */
+.magnetic-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magnetic-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--electric-orange);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  z-index: 0;
+}
+
+.magnetic-btn:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.magnetic-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Timeline */
+.timeline-line {
+  background: linear-gradient(180deg, var(--bone) 0%, var(--taupe) 100%);
+}
+
+/* Video overlay for flashlight effect */
+.flashlight-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.flashlight-video {
+  filter: grayscale(100%) brightness(0.3);
+  transition: filter 0.3s ease;
+}
+
+/* Section transitions */
+.section {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Horizontal scroll container */
+.horizontal-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+/* Canvas container */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Text reveal animation */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-reveal {
+  overflow: hidden;
+}
+
+.text-reveal span {
+  display: inline-block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Glow effect */
+.glow {
+  text-shadow: 0 0 10px var(--electric-orange),
+               0 0 20px var(--electric-orange),
+               0 0 30px var(--electric-orange),
+               0 0 40px var(--electric-orange);
+}
+
+/* Particle explosion */
+@keyframes explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
